@@ -8,13 +8,13 @@ MainFileName =pd.read_csv("//192.168.2.32/Group/Data Team/Brand_Update_Location/
 Brand_Folder_List = MainFileName[MainFileName.category_brand_name !='SalesData']["Brand_Folder_Name"]
 
 #For each Brand_Folder_List item, go to brand folder and extract images
-#Copy All images to xyz location
+#Copy All images to O2_P9_S1_ImageData_PR_ImageFiles folder
 for i in range(0,len(Brand_Folder_List)):
     
     Brand = Brand_Folder_List.iloc[i]
     ImageFolder = "images--"+Brand
     print(Brand)
-
+ 
     BrandFolderLocation = "//192.168.2.32/GoogleDrive/Completed Magento Uploads (v 1.0)/" + Brand
     os.chdir(BrandFolderLocation)
 
