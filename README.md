@@ -5,7 +5,8 @@ When base data for a product is missing or unavailable but an image is present, 
 In the world of ecommerce, product images are essential in order to sell products. Hence, the accessibility to quality images may be more than organized and structured product data. Often, depending on the online vender, the same image may be accompanied with inconsistent product data. Or, product data may be missing entirely. 
 
 <br> In other cases, a single manufacturer may produce a product for multiple other companies. The only distinction between the products could be the brands logo, different color themes or how the product is presented in the images. This presents a challenge to mass categorization of products especially when no other product data is available, except an image.
-Here, I will define product data as the minimum data needed by the vender to shipping and organize products on their website. In order to ship a product, knowing the length, width, height and weight is necessary. To organize products, we would need to know what the product is, or Part Type, and possibly its brand.
+
+<br> Here, I will define product data as the minimum data needed by the vender to shipping and organize products on their website. In order to ship a product, knowing the length, width, height and weight is necessary. To organize products, we would need to know what the product is, or Part Type, and possibly its brand.
 ## Data Source
 In order to address this problem, I will focused on automotive parts as use case due to immense application and specificity of products. 
 Data was provided by an unnamed source which had a large repository of images available along with their pre-labeled brands, part type and dimensions.
