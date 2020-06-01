@@ -9,125 +9,32 @@ In the world of ecommerce, product images are essential in order to sell product
 <br> Here, I will define product data as the minimum data needed by the vender to shipping and organize products on their website. In order to ship a product, knowing the length, width, height and weight is necessary. To organize products, we would need to know what the product is, or Part Type, and possibly its brand.
 ## Data Source
 In order to address this problem, I will focused on automotive parts as use case due to immense application and specificity of products. 
-Data was provided by an unnamed source which had a large repository of images available along with their pre-labeled brands, part type and dimensions.
+<br> Data was provided by an unnamed source which had a large repository of images available along with their pre-labeled brands, part type and dimensions.
 ### Example Input
 accel-0576.jpg (https://github.com/abulhassansheikh/O2_P9_ProductImageToData/blob/master/SampleImageData/accel-0576.jpg)
 ### Example Output
 - Brand: Accel
 - Part Type: Spark Plug
-- Length: 4.9 inch
-- Width: 3.6 inch
-- Height: 1.1 inch
-- Weight: 0.25 lb
+- Length: 4.9 to 5.0 inch
+- Width: 3.6 to 4.1 inch
+- Height: 1.1 to 2.2 inch
+- Weight: 0.25 to 1.0 lb
 ### Data Collection
 Two sets of data were collected: image details and product images. Image detail data was acquired by iterating across +200 brand folders to identify appropriate .csv files and retrieved the brand, part type, weight, height, length and width for each image. The product images were acquired by iterating over the image folder nested within each brand folder and images were copy-pasted with the “shutil” package to a target folder. Cumulatively, +300,000 unique product images were pooled from all brand folders. 
 
 ## Project Approach 
+This problem required the use of both classification and regression supervised algorithms. For the classification component, an image needs to be classified into a part type that fits the function of the product. Then, once we know if the part type, we require regression analysis to predict the dimentions of the product. 
 
-## Project Strategy Log
-December-2019
-I can construct ML Model to classify the weight and also the L/W/H:
-1. L/W/H -> Weight using multivariable regression
-2. Part Type -> L/W/H by either using clustering or finding mean values
+<br> To tackle the classification problem, a convolutional neural network was constructed with three layers with the following nodes in each layer: 1000, 3000, 2584, respectively. In order to improve the generalization of the model, both 20% random dropout layers and L2 regularization were used. This yielded a approximate 25% accuracy in the model. 
 
-What broad classification can I use for Images that will also serve to reduce additional analysis?
-- Brand: Some brands may only have a single PT, but I remember, there arn't that many brands, maybe less than 10
-- PT is too specific since there are so many
-- L1: Won't help narrow down brands/PT that much
-<<<<<<< HEAD
-=======
+<br> Secondly, for each part type's width, length and height, its mean and standard deviation were determined. This max and min dimensional range for each part type group were used as features in a multivariable regression model to predict the weight. An additional feature of Volume was also included. As expected, there was multicollinearity present since the dimension and weight of products would be expected to be correlated. 
 
-I may need to create my own classifier with the following qualities:
-- 1 = Products that are very unque and associated to a single brand/PT
-- 2 = Products with that come from a single brand with unique multiple PT
-- 3 = Products with single PT that multiple brands produce
-- 4 = Multiple brands with multiple non-unique part types
-### Model Strategy: 
-Image -> Class 1/2/3
+<br> In conjunction with the CNN and regression model, for a given image, we can both classify and predict it's dimensions and weight. 
 
-Class 1
-1. Image + Class 1/2/3 -> Brand/PT
-2. Image + Brand/PT -> Brand/PT
-3. PT -> L/W/H
-4. L/W/H -> Weight
+## Project API
+Once both models had been integrated the back-end of a simple html website using the Flask framework, Heroku was used to deploy the application. 
 
-Class 2
-1. Image + Class 1/2/3 -> Brand
-2. Image + Brand -> PT
-3. PT -> L/W/H
-4. L/W/H -> Weight
+<br> To make the process of deployment easy, pipenv was used to capture and freeze the required package versions. 
 
-Class 3
-1. Image + Class 1/2/3 -> PT
-2. Image + PT -> Brand & PT -> L/W/H
-3. L/W/H -> Weight
-
-### Plan of Attack:
-1. L/W/H -> Weight (Done)
-2. PT -> L/W/H (Done)
-3. Image -> Class 1/2/3 
-(Basic, simple NN, Fully Connected, and add logical complexity, CNN is the end)
-4. Image + Class 1/2/3 -> PT
-5. Image + Class 1/2/3 -> Brand
-6. Reevaluate to see if I can incorperate additional models or will need L1/L2/L3 data
-
-January 2020
-- Class 1/2/3 resulted in too many values in each category. 
-
-Idea: 
-- I can include a broader level classifier than part type by including L1/L2/L3 categories
-- This may add additional complexity, But if my results arn't accurate, I can include broader classifiers to improve accuracy.   
-
-As a result, decided to use the L1/l2/L3 categories
-- L1 has 10 categories
-- L2 has 84
-- L3 has 276
-When training images using base NN, I had 70% image classification accuracy
->>>>>>> 3a4dde3d79c4fbaf2c6718e3be2de02a7f44d95d
-
-I may need to create my own classifier with the following qualities:
-- 1 = Products that are very unque and associated to a single brand/PT
-- 2 = Products with that come from a single brand with unique multiple PT
-- 3 = Products with single PT that multiple brands produce
-- 4 = Multiple brands with multiple non-unique part types
-### Model Strategy: 
-Image -> Class 1/2/3
-
-Class 1
-1. Image + Class 1/2/3 -> Brand/PT
-2. Image + Brand/PT -> Brand/PT
-3. PT -> L/W/H
-4. L/W/H -> Weight
-
-Class 2
-1. Image + Class 1/2/3 -> Brand
-2. Image + Brand -> PT
-3. PT -> L/W/H
-4. L/W/H -> Weight
-
-Class 3
-1. Image + Class 1/2/3 -> PT
-2. Image + PT -> Brand & PT -> L/W/H
-3. L/W/H -> Weight
-
-### Plan of Attack:
-1. L/W/H -> Weight (Done)
-2. PT -> L/W/H (Done)
-3. Image -> Class 1/2/3 
-(Basic, simple NN, Fully Connected, and add logical complexity, CNN is the end)
-4. Image + Class 1/2/3 -> PT
-5. Image + Class 1/2/3 -> Brand
-6. Reevaluate to see if I can incorperate additional models or will need L1/L2/L3 data
-
-January 2020
-- Class 1/2/3 resulted in too many values in each category. 
-
-Idea: 
-- I can include a broader level classifier than part type by including L1/L2/L3 categories
-- This may add additional complexity, But if my results arn't accurate, I can include broader classifiers to improve accuracy.   
-
-As a result, decided to use the L1/l2/L3 categories
-- L1 has 10 categories
-- L2 has 84
-- L3 has 276
-When training images using base NN, I had 70% image classification accuracy
+<br> The live application can be viewed at: https://imagetodata.herokuapp.com. 
+<br> All that is required to use the application is to upload an image and press submit. Doing this will provide the end user predicted data on the image.
