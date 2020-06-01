@@ -31,6 +31,17 @@ This problem required the use of both classification and regression supervised a
 
 <br> In conjunction with the CNN and regression model, for a given image, we can both classify and predict it's dimensions and weight. 
 
+## Repo Breakdown
+The following provides a breakdown and description of the key files and folders within this repo. 
+
+SampleImageData: Containes a set of example images used to train the CNN in their raw form. There is also a example data set for each image showing features used for training purposes. 
+
+Exploratory_Code: This folder contains a Jupyter notebook with all the compiled exlporatory analysis conducted on the data as well as the decision logic for the project approach. 
+
+Production_Code: There are three .py files in this folder. Each .py file is associated with the development of the CNN and regression models. 
+
+API_Code: This folder contains the flask and heroku framework for constructing the app front-end and deployment. Within the app folder, we have the main.py file with the API code along with any reference files and model files. 
+
 ## Project API
 Once both models had been integrated the back-end of a simple html website using the Flask framework, Heroku was used to deploy the application. 
 
