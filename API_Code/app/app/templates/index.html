@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        body,h1 {font-family: "Raleway", Arial, sans-serif}
+        h1 {letter-spacing: 6px}.w3-row-padding img {margin-bottom: 12px}
+    </style>
+
+    <body class="w3-padding-large">
+
+        <header class="w3-panel w3-center w3-opacity w3-mobile" >
+
+          <h1 class="w3-xlarge w3-black w3-mobile">Image to Data</h1>
+
+          <div class="w3-padding-small">
+            <div class="w3-bar w3-border">
+
+              <form class="w3-panel" method="POST" enctype="multipart/form-data">
+                <p><input class="w3-button w3-gray w3-mobile" type="file" name="query_img"></p>
+                <p><input class="w3-button w3-gray w3-mobile" type="submit" ></p>
+              </form>
+
+            </div>
+          </div>
+
+        </header>
+
+        <center>
+            <img class="w3-image w3-padding-small w3-mobile" src="{{ query_path }}"  width="300" height="300">
+        </center>
+
+        <table class="w3-table w3-centered w3-padding-large w3-striped" >
+
+        <tr >
+          <th width="20%">Property</th>
+          <th >Data</th>
+        </tr>
+
+        {% for Data in Data %}
+
+            <tr  align="center">
+                <td width="20%">{{ Data[0] }}</td>
+                <td>{{ Data[1] }}</td>
+            </tr>
+
+        {% endfor %}
+
+      </table>
+
+    <div class="w3-container w3-margin w3-black w3-xlarge"></div>
+
+    </body>
+</html>
