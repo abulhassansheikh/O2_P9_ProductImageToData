@@ -35,6 +35,5 @@ This problem required the use of both classification and regression supervised a
 Once both models had been integrated the back-end of a simple html website using the Flask framework, Heroku was used to deploy the application. 
 
 <br> To make the process of deployment easy, pipenv was used to capture and freeze the required package versions. 
-
 <br> The live application can be viewed at: https://imagetodata.herokuapp.com. 
-<br> All that is required to use the application is to upload an image and press submit. Doing this will provide the end user predicted data on the image.
+<br> All that is required to use the application is to upload an image and press submit. Doing this will provide the end user predicted data on the image. Since I am using a free account of Heroku, the scalability is limited but can be increased with the subscription version. 
